@@ -1,31 +1,33 @@
-// Arrays to keep track of each task's state
-const taskTitles = [];
-const taskComplete = [];
+// Task constructor function
+function Task(title) {
+  this.title = title;
+  this.complete = false;
 
-// Create a new task by adding to the arrays
-// A new task will be created as incomplete
-function newTask(title) {
-  taskTitles.push(title);
-  taskComplete.push(false);
-}
+  // Method to mark a task as complete
+  this.completeTask = function () {
+    this.complete = true;
+  };
 
-// Mark a task as complete by setting the task's status in the `taskComplete` array to `true`
-function completeTask(taskIndex) {
-  taskComplete[taskIndex] = true;
-}
-
-// Print the state of a task to the console in a nice readable way
-function logTaskState(taskIndex) {
-  const title = taskTitles[taskIndex];
-  const complete = taskComplete[taskIndex];
-  console.log(`${title} has${complete ? " " : " not "}been completed`);
+  // Method to log the state of a task
+  this.logTaskState = function () {
+    console.log(`${this.title} has${this.complete ? " " : " not "}been completed`);
+  };
 }
 
 // DRIVER CODE BELOW
 
-newTask("Clean Cat Litter"); // task 0
-newTask("Do Laundry"); // task 1
+// Create new task objects
+const cleanCatLitter = new Task("Clean Cat Litter");
+const doLaundry = new Task("Do Laundry");
 
-logTaskState(0); // Clean Cat Litter has not been completed
-completeTask(0);
-logTaskState(0); // Clean Cat Litter has been completed
+// Log initial state of tasks
+cleanCatLitter.logTaskState(); // Clean Cat Litter has not been completed
+doLaundry.logTaskState(); // Do Laundry has not been completed
+
+// Complete tasks
+cleanCatLitter.completeTask();
+doLaundry.completeTask();
+
+// Log updated state of tasks
+cleanCatLitter.logTaskState(); // Clean Cat Litter has been completed
+doLaundry.logTaskState(); // Do Laundry has been completed
